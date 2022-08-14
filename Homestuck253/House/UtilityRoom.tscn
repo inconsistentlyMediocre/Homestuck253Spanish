@@ -1,0 +1,117 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://Backgrounds/UtilityRoom/WashingMachine.png" type="Texture" id=1]
+[ext_resource path="res://Backgrounds/UtilityRoom/UtilityRoom.png" type="Texture" id=2]
+[ext_resource path="res://Backgrounds/UtilityRoom/UtilityRoomDoor.png" type="Texture" id=3]
+[ext_resource path="res://Backgrounds/UtilityRoom/Boxes.png" type="Texture" id=4]
+[ext_resource path="res://Backgrounds/UtilityRoom/ArrowUtility.png" type="Texture" id=5]
+[ext_resource path="res://House/UtilityRoom.gd" type="Script" id=6]
+[ext_resource path="res://Entities/Harlequinsprite.tscn" type="PackedScene" id=7]
+[ext_resource path="res://John/John.tscn" type="PackedScene" id=8]
+
+[node name="UtilityRoom" type="Node2D"]
+script = ExtResource( 6 )
+map_size = Vector2( 1020, 910 )
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="UtilityRoom" type="StaticBody2D" parent="Map"]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Map/UtilityRoom"]
+texture = ExtResource( 2 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/UtilityRoom"]
+polygon = PoolVector2Array( 4, 629, 39, 595, 452, 415, 946, 596, 992, 628, 992, 144, 450, -1, 3, 145 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Map/UtilityRoom"]
+polygon = PoolVector2Array( 522, 817, 27, 588, -4, 630, 523, 877, 1027, 616, 956, 594 )
+
+[node name="UtilityRoomDoor" type="Sprite" parent="Map" groups=[
+"Interactables",
+]]
+position = Vector2( 486, 87 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="Area2D" type="Area2D" parent="Map/UtilityRoomDoor"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/UtilityRoomDoor/Area2D"]
+polygon = PoolVector2Array( -3, 339, -2, -4, 125, 35, 123, 384 )
+
+[node name="ArrowUtilityRoom" type="Sprite" parent="." groups=[
+"Interactables",
+]]
+position = Vector2( 281, 719 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Area2D" type="Area2D" parent="ArrowUtilityRoom"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ArrowUtilityRoom/Area2D"]
+polygon = PoolVector2Array( 0, 59, 74, 59, 74, 42, 81, 39, 81, 20, 36, 0, 15, 11, 1, 4 )
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="WashingMachine" type="StaticBody2D" parent="YSort" groups=[
+"Interactables",
+]]
+position = Vector2( 87, 536 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="YSort/WashingMachine"]
+position = Vector2( -21, -254 )
+texture = ExtResource( 1 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/WashingMachine"]
+polygon = PoolVector2Array( -20, 57, 80, 105, 333, -5, 257, -50, 257, -217, -20, -115 )
+
+[node name="Area2D" type="Area2D" parent="YSort/WashingMachine"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/WashingMachine/Area2D"]
+polygon = PoolVector2Array( -20, 59, 87, 110, 333, -6, 331, -183, 257, -216, 244, -248, 235, -253, -19, -165 )
+
+[node name="Boxes" type="StaticBody2D" parent="YSort" groups=[
+"Interactables",
+]]
+position = Vector2( 683, 582 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="YSort/Boxes"]
+position = Vector2( 5.99994, -382 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/Boxes"]
+polygon = PoolVector2Array( 227, -82, 231, 17, 141, 68, 10.9999, 9, 70.9999, -30, 69.9999, -96 )
+
+[node name="Area2D" type="Area2D" parent="YSort/Boxes"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="YSort/Boxes/Area2D"]
+polygon = PoolVector2Array( 142, 67, 6.99994, 9, 8.99994, -346, 96.9999, -384, 231, -337, 232, 16 )
+
+[node name="Harlequinsprite" parent="YSort" instance=ExtResource( 7 )]
+position = Vector2( 1182, 332 )
+
+[node name="John" parent="YSort" instance=ExtResource( 8 )]
+position = Vector2( 520, 515 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 1020, 910 )

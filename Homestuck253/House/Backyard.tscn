@@ -1,0 +1,191 @@
+[gd_scene load_steps=16 format=2]
+
+[ext_resource path="res://John/John.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Backgrounds/Backyard/Door.png" type="Texture" id=2]
+[ext_resource path="res://Backgrounds/Backyard/Backyard.png" type="Texture" id=3]
+[ext_resource path="res://Backgrounds/Backyard/Swingset.png" type="Texture" id=4]
+[ext_resource path="res://Backgrounds/Backyard/Tree.png" type="Texture" id=5]
+[ext_resource path="res://Backgrounds/Backyard/Wires.png" type="Texture" id=6]
+[ext_resource path="res://Backgrounds/Backyard/Generator.png" type="Texture" id=7]
+[ext_resource path="res://House/Backyard.gd" type="Script" id=8]
+[ext_resource path="res://AnimationFrames/DropletsFrames.tres" type="SpriteFrames" id=9]
+[ext_resource path="res://Entities/Harlequinsprite.tscn" type="PackedScene" id=10]
+[ext_resource path="res://Backgrounds/Backyard/PogoRide.png" type="Texture" id=11]
+[ext_resource path="res://House/CameraControl.gd" type="Script" id=12]
+[ext_resource path="res://Audio/Wind.ogg" type="AudioStream" id=13]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 22, 47 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 295, 301 )
+
+[node name="Backyard" type="Node2D"]
+script = ExtResource( 8 )
+map_size = Vector2( 4550, 3940 )
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Backyard" type="StaticBody2D" parent="Map"]
+z_index = -4
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Map/Backyard"]
+scale = Vector2( 1.25, 1.25 )
+texture = ExtResource( 3 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Backyard"]
+visible = false
+polygon = PoolVector2Array( 1394, 2389, 1677, 2253, 2360, 2586, 3620, 1999, 3777, 2006, 3963, 2106, 4017, 2182, 4034, 1716, 597, 1597, 597, 1839, 588, 1984 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Map/Backyard"]
+visible = false
+polygon = PoolVector2Array( 1350, 2384, 1590, 2405, 1643, 2493, 1666, 2579, 1628, 2605, 1693, 2753, 1481, 2914, 1298, 2931, 1212, 2952, 1143, 3007, 1001, 3135, 1020, 3188, 1205, 3380, 1507, 3319, 1609, 3250, 1911, 3276, 1990, 3350, 2299, 3335, 2425, 3340, 2839, 3278, 3067, 3126, 3255, 3150, 3536, 3140, 3705, 3052, 3700, 3009, 3610, 2974, 3529, 2976, 3455, 2983, 3248, 2898, 3015, 2891, 2910, 2936, 2827, 2936, 2734, 2891, 2632, 2672, 2706, 2567, 2830, 2548, 2877, 2548, 2946, 2493, 2979, 2417, 3110, 2370, 3258, 2393, 3436, 2429, 3707, 2377, 3907, 2327, 3947, 2322, 4019, 2184, 3966, 2110, 4119, 2132, 4083, 3925, 654, 3938, 565, 2806 )
+
+[node name="BackyardDoor" type="Sprite" parent="Map" groups=[
+"Interactables",
+]]
+position = Vector2( 2148, 2230 )
+texture = ExtResource( 2 )
+
+[node name="Area2D" type="Area2D" parent="Map/BackyardDoor"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/BackyardDoor/Area2D"]
+polygon = PoolVector2Array( 90, 277, 90, -189, -90, -277, -90, 189 )
+
+[node name="GeneratorAndWires" type="Node2D" parent="Map"]
+
+[node name="Generator" type="Sprite" parent="Map/GeneratorAndWires" groups=[
+"Interactables",
+]]
+position = Vector2( 1563, 2079 )
+texture = ExtResource( 7 )
+centered = false
+
+[node name="Area2D" type="Area2D" parent="Map/GeneratorAndWires/Generator"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/GeneratorAndWires/Generator/Area2D"]
+polygon = PoolVector2Array( 3, 130, 20, 137, 59, 121, 57, 6, 42, -1, 1, 11 )
+
+[node name="Wires" type="Sprite" parent="Map/GeneratorAndWires" groups=[
+"Interactables",
+]]
+position = Vector2( 1513, 2214 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="Area2D" type="Area2D" parent="Map/GeneratorAndWires/Wires"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/GeneratorAndWires/Wires/Area2D"]
+polygon = PoolVector2Array( 94, 103, 134, 133, 109, 142, 62, 138, 39, 141, 24, 147, 10, 165, 1, 197, 9, 204, 15, 169, 37, 148, 122, 149, 144, 136, 171, 148, 177, 172, 171, 197, 161, 207, 147, 212, 136, 210, 109, 205, 92, 205, 75, 214, 66, 232, 64, 245, 73, 239, 80, 220, 93, 212, 149, 220, 175, 206, 184, 186, 183, 161, 176, 145, 149, 128, 145, 94, 130, 87, 110, 59, 100, 1, 69, 7, 80, 88 )
+
+[node name="Droplets" type="AnimatedSprite" parent="Map/GeneratorAndWires"]
+position = Vector2( 1531, 2455 )
+scale = Vector2( 0.75, 0.75 )
+frames = ExtResource( 9 )
+frame = 14
+playing = true
+
+[node name="YSort" type="YSort" parent="Map"]
+
+[node name="Tree" type="StaticBody2D" parent="Map/YSort"]
+position = Vector2( 3252, 2952 )
+
+[node name="Sprite" type="Sprite" parent="Map/YSort/Tree"]
+position = Vector2( -84, -1354 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/YSort/Tree"]
+polygon = PoolVector2Array( -50, 96, 11, 61, 39, 14, 216, 18, 304, 96, 295, 192, -2, 190, -17, 156, 22, 146, 57, 94, 35, 85 )
+
+[node name="Handcuffs" type="Node2D" parent="Map/YSort/Tree" groups=[
+"Interactables",
+]]
+
+[node name="Area2D" type="Area2D" parent="Map/YSort/Tree/Handcuffs"]
+collision_layer = 3
+collision_mask = 2147483651
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/YSort/Tree/Handcuffs/Area2D"]
+position = Vector2( 584, -380 )
+shape = SubResource( 1 )
+
+[node name="Swingset" type="StaticBody2D" parent="Map/YSort" groups=[
+"Interactables",
+]]
+position = Vector2( 1677, 3159 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Map/YSort/Swingset"]
+position = Vector2( 15, -252 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/YSort/Swingset"]
+polygon = PoolVector2Array( 287, 86, 236, 57, 200, -4, 23, 2, -2, -16, 361, -60, 564, -47, 620, 93, 765, 63, 830, 81, 805, 158, 610, 170, 363, 179 )
+
+[node name="Area2D" type="Area2D" parent="Map/YSort/Swingset"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/YSort/Swingset/Area2D"]
+polygon = PoolVector2Array( 192, 423, 172, 385, 464, 189, 370, 110, 274, 113, 182, 1, 3, 7, -7, -30, 471, -267, 605, 83, 781, 57, 834, 96, 801, 178, 602, 177, 368, 536, 326, 509, 549, 186 )
+
+[node name="PogoRide" type="StaticBody2D" parent="Map/YSort" groups=[
+"Interactables",
+]]
+position = Vector2( 1799, 2867 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Map/YSort/PogoRide"]
+position = Vector2( -83, -182 )
+texture = ExtResource( 11 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/YSort/PogoRide"]
+polygon = PoolVector2Array( -81, 38, 5, 72, 92, 53, 84, 13, -3, -1, -46, 10 )
+
+[node name="Area2D" type="Area2D" parent="Map/YSort/PogoRide"]
+collision_layer = 3
+collision_mask = 3
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/YSort/PogoRide/Area2D"]
+polygon = PoolVector2Array( 3, 53, -24, 56, -57, 74, -88, 43, -66, 10, -91, -54, -63, -140, -37, -185, 52, -177, 93, -83, 100, -18, 97, 57, 76, 65, 38, 76 )
+
+[node name="John" parent="Map/YSort" instance=ExtResource( 1 )]
+position = Vector2( 2026, 2548 )
+
+[node name="Harlequinsprite" parent="Map/YSort" instance=ExtResource( 10 )]
+position = Vector2( 2624, 2000 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 4550, 3940 )
+
+[node name="CameraControl" type="Area2D" parent="."]
+position = Vector2( 3511, 2745 )
+script = ExtResource( 12 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="CameraControl"]
+position = Vector2( -70, 140 )
+shape = SubResource( 2 )
+
+[node name="Audio" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 13 )
+autoplay = true
+[connection signal="body_entered" from="CameraControl" to="CameraControl" method="_on_CameraControl_body_entered"]
+[connection signal="body_exited" from="CameraControl" to="CameraControl" method="_on_CameraControl_body_exited"]

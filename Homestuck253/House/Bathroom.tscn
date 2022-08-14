@@ -1,0 +1,141 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://John/John.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Bathroom.gd" type="Script" id=2]
+[ext_resource path="res://Backgrounds/Bathroom/Bathroom.png" type="Texture" id=3]
+[ext_resource path="res://Backgrounds/Bathroom/Window.png" type="Texture" id=4]
+[ext_resource path="res://Backgrounds/Bathroom/Toilet.png" type="Texture" id=5]
+[ext_resource path="res://Backgrounds/Bathroom/Bath.png" type="Texture" id=6]
+[ext_resource path="res://Backgrounds/Bathroom/Rug.png" type="Texture" id=7]
+[ext_resource path="res://Backgrounds/Hallway/Arrow.png" type="Texture" id=8]
+[ext_resource path="res://House/CameraControl.gd" type="Script" id=9]
+[ext_resource path="res://Backgrounds/Bathroom/BathroomWindowView.jpg" type="Texture" id=10]
+[ext_resource path="res://House/ShowView.gd" type="Script" id=11]
+[ext_resource path="res://Entities/Harlequinsprite.tscn" type="PackedScene" id=12]
+
+[node name="Bathroom" type="Node2D"]
+script = ExtResource( 2 )
+map_size = Vector2( 990, 1000 )
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Bathroom" type="StaticBody2D" parent="Map"]
+z_index = -4
+
+[node name="Sprite" type="Sprite" parent="Map/Bathroom"]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Bathroom"]
+visible = false
+polygon = PoolVector2Array( 3, 607, 454, 416, 708, 503, 706, 582, 905, 673, 994, 629, 991, 143, 452, 3, 1, 146 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Map/Bathroom"]
+visible = false
+polygon = PoolVector2Array( 3, 584, 522, 813, 957, 597, 951, 664, 524, 898, 1, 637 )
+
+[node name="BathroomWindow" type="Sprite" parent="Map" groups=[
+"Interactables",
+]]
+position = Vector2( 560, 94 )
+z_index = -1
+texture = ExtResource( 4 )
+centered = false
+
+[node name="InteractArea" type="Area2D" parent="Map/BathroomWindow"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/BathroomWindow/InteractArea"]
+polygon = PoolVector2Array( 150, 324, 149, 311, 178, 303, 176, 37, 40, -2, 22, 3, 22, 245, 15, 245, 13, 281 )
+
+[node name="Rug" type="Sprite" parent="Map"]
+position = Vector2( 344, 534 )
+z_index = -1
+texture = ExtResource( 7 )
+centered = false
+
+[node name="YSort" type="YSort" parent="Map"]
+
+[node name="John" parent="Map/YSort" instance=ExtResource( 1 )]
+position = Vector2( 680, 690 )
+
+[node name="Harlequinsprite" parent="Map/YSort" instance=ExtResource( 12 )]
+position = Vector2( 361, 148 )
+
+[node name="BathtubAndToilet" type="StaticBody2D" parent="Map/YSort" groups=[
+"Interactables",
+]]
+position = Vector2( 469, 595 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Toilet" type="Sprite" parent="Map/YSort/BathtubAndToilet"]
+position = Vector2( -112.1, -416.9 )
+z_index = -1
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Bathtub" type="Sprite" parent="Map/YSort/BathtubAndToilet"]
+position = Vector2( -399.1, -180.9 )
+texture = ExtResource( 6 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/YSort/BathtubAndToilet"]
+visible = false
+position = Vector2( -468.1, -594.9 )
+polygon = PoolVector2Array( 408, 755, 527, 732, 559, 684, 553, 617, 480, 594, 480, 540, 585, 546, 623, 520, 621, 461, 568, 419, 583, 309, 502, 292, 509, 168, 401, 174, 385, 216, 342, 231, 350, 335, 392, 362, 391, 405, 340, 444, 211, 400, 103, 398, 50, 459, 53, 605 )
+
+[node name="InteractArea" type="Area2D" parent="Map/YSort/BathtubAndToilet"]
+position = Vector2( 91, -501 )
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/YSort/BathtubAndToilet/InteractArea"]
+position = Vector2( -559.1, -93.9 )
+polygon = PoolVector2Array( 408, 755, 527, 732, 559, 684, 555.1, 616.9, 530.1, 602.9, 528.1, 554.9, 585, 546, 623, 520, 621, 461, 568, 419, 583, 309, 502, 292, 509, 168, 401, 174, 385, 216, 342, 231, 350, 335, 392, 362, 391, 405, 340, 444, 211, 400, 103, 398, 50, 459, 53, 605 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 1000, 1000 )
+
+[node name="ArrowBathroom" type="Sprite" parent="." groups=[
+"Interactables",
+]]
+position = Vector2( 770, 741 )
+texture = ExtResource( 8 )
+centered = false
+
+[node name="InteractArea" type="Area2D" parent="ArrowBathroom"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="ArrowBathroom/InteractArea"]
+polygon = PoolVector2Array( 1, 39, 1, 21, 43, 1, 67, 13, 80, 4, 81, 59, 8, 60, 8, 43 )
+
+[node name="CameraControl" type="Area2D" parent="."]
+visible = false
+position = Vector2( 444, 449 )
+script = ExtResource( 9 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="CameraControl"]
+polygon = PoolVector2Array( -44, 310, 345, 82, 350, -153, -205, -134, -223, 230 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="BathroomWindowView" type="TextureRect" parent="CanvasLayer" groups=[
+"Views",
+]]
+visible = false
+margin_right = 40.0
+margin_bottom = 40.0
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = ExtResource( 10 )
+script = ExtResource( 11 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="body_entered" from="CameraControl" to="CameraControl" method="_on_CameraControl_body_entered"]
+[connection signal="body_exited" from="CameraControl" to="CameraControl" method="_on_CameraControl_body_exited"]

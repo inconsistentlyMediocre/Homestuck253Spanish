@@ -1,0 +1,111 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://John/John.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Entities/Harlequinsprite.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Backgrounds/Hallway/Hallway.png" type="Texture" id=3]
+[ext_resource path="res://House/Hallway.gd" type="Script" id=4]
+[ext_resource path="res://Backgrounds/Hallway/DoorRight.png" type="Texture" id=5]
+[ext_resource path="res://Backgrounds/Hallway/HarryAndersonPoster.jpg" type="Texture" id=6]
+[ext_resource path="res://Backgrounds/Hallway/Arrow.png" type="Texture" id=7]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 74, 79 )
+
+[node name="Hallway" type="Node2D"]
+script = ExtResource( 4 )
+map_size = Vector2( 645, 990 )
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Hallway" type="StaticBody2D" parent="Map"]
+position = Vector2( -7, 0 )
+
+[node name="Sprite" type="Sprite" parent="Map/Hallway"]
+texture = ExtResource( 3 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Hallway"]
+visible = false
+polygon = PoolVector2Array( 44, 866, 230, 537, 431, 541, 613, 859, 141, 902, 613, 905, 655, 902, 655, 9, -1, 6, 8, 905, 35, 907, 620, 866 )
+
+[node name="DoorRight" type="Sprite" parent="Map" groups=[
+"Interactables",
+]]
+position = Vector2( 487, 134 )
+texture = ExtResource( 5 )
+centered = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="InteractArea" type="Area2D" parent="Map/DoorRight"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/DoorRight/InteractArea"]
+position = Vector2( -473, -137 )
+polygon = PoolVector2Array( 527, 711, 529, 134, 472, 169, 474, 605 )
+
+[node name="DoorLeft" type="Sprite" parent="Map" groups=[
+"Interactables",
+]]
+position = Vector2( 145, 133 )
+texture = ExtResource( 5 )
+centered = false
+flip_h = true
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="InteractArea" type="Area2D" parent="Map/DoorLeft"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/DoorLeft/InteractArea"]
+position = Vector2( -474, -132 )
+polygon = PoolVector2Array( 528, 611, 529, 167, 471, 130, 474, 707 )
+
+[node name="HarryAndersonPoster" type="Sprite" parent="Map" groups=[
+"Interactables",
+]]
+position = Vector2( 276, 278 )
+texture = ExtResource( 6 )
+centered = false
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="InteractArea" type="Area2D" parent="Map/HarryAndersonPoster"]
+position = Vector2( 69, 78 )
+collision_layer = 2
+collision_mask = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/HarryAndersonPoster/InteractArea"]
+shape = SubResource( 1 )
+
+[node name="ArrowHallway" type="Sprite" parent="Map" groups=[
+"Interactables",
+]]
+position = Vector2( 317, 811 )
+texture = ExtResource( 7 )
+
+[node name="InteractArea" type="Area2D" parent="Map/ArrowHallway"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/ArrowHallway/InteractArea"]
+polygon = PoolVector2Array( -34, 29, -34, 13, -42, 8, -42, -9, 4, -30, 24, -19, 38, -27, 40, 28 )
+
+[node name="YSort" type="YSort" parent="Map"]
+
+[node name="John" parent="Map/YSort" instance=ExtResource( 1 )]
+position = Vector2( 330, 630 )
+
+[node name="Harlequinsprite" parent="Map/YSort" instance=ExtResource( 2 )]
+position = Vector2( 679, 482 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 669, 993 )

@@ -1,0 +1,118 @@
+[gd_scene load_steps=10 format=2]
+
+[ext_resource path="res://AnimationFrames/JohnFrames.tres" type="SpriteFrames" id=1]
+[ext_resource path="res://John/John.gd" type="Script" id=2]
+[ext_resource path="res://John/Camera2D.gd" type="Script" id=3]
+[ext_resource path="res://Sprites/GUI/ClickThis.png" type="Texture" id=4]
+[ext_resource path="res://Sprites/GUI/Control.png" type="Texture" id=5]
+[ext_resource path="res://John/ClickThis.gd" type="Script" id=6]
+
+[sub_resource type="CapsuleShape2D" id=1]
+radius = 21.0
+height = 40.0
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 72, 103 )
+
+[sub_resource type="Animation" id=3]
+resource_name = "Bounce"
+length = 0.2
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:rect_position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.1, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 470, 45 ), Vector2( 470, 55 ), Vector2( 470, 45 ) ]
+}
+
+[node name="John" type="KinematicBody2D" groups=[
+"Interactables",
+]]
+script = ExtResource( 2 )
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( -0.5, -91 )
+frames = ExtResource( 1 )
+animation = "Front"
+flip_h = true
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2( -0.5, 0 )
+rotation = 1.5708
+shape = SubResource( 1 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 0, -90 )
+current = true
+limit_left = 0
+limit_top = 0
+smoothing_enabled = true
+script = ExtResource( 3 )
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 0.2
+one_shot = true
+
+[node name="InteractArea" type="Area2D" parent="."]
+collision_layer = 2
+collision_mask = 2
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="InteractCollision" type="CollisionShape2D" parent="InteractArea"]
+position = Vector2( 2, -93 )
+shape = SubResource( 2 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+layer = 0
+
+[node name="Control" type="Control" parent="CanvasLayer"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Controller" type="TextureRect" parent="CanvasLayer/Control"]
+margin_left = 582.0
+margin_top = 11.0
+margin_right = 638.0
+margin_bottom = 51.0
+mouse_default_cursor_shape = 2
+texture = ExtResource( 5 )
+script = ExtResource( 6 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ClickThis" type="TextureRect" parent="CanvasLayer/Control"]
+margin_left = 470.0
+margin_top = 45.0
+margin_right = 642.0
+margin_bottom = 119.0
+texture = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CanvasLayer/Control/ClickThis"]
+autoplay = "Bounce"
+anims/Bounce = SubResource( 3 )
+[connection signal="animation_finished" from="AnimatedSprite" to="." method="_on_AnimatedSprite_animation_finished"]
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]
+[connection signal="gui_input" from="CanvasLayer/Control/Controller" to="CanvasLayer/Control/Controller" method="_on_Controller_gui_input"]

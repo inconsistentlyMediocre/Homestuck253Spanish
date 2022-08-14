@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/Showtime.ogg-0d99bfa78576484af9d1eabf2349f543.oggstr"
+
+[deps]
+
+source_file="res://Audio/Showtime.ogg"
+dest_files=[ "res://.import/Showtime.ogg-0d99bfa78576484af9d1eabf2349f543.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

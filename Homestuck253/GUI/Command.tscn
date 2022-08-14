@@ -1,0 +1,40 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://Fonts/CourierNew.tres" type="DynamicFont" id=1]
+[ext_resource path="res://NinePatchRect.gd" type="Script" id=2]
+[ext_resource path="res://Sprites/GUI/9patch.png" type="Texture" id=3]
+[ext_resource path="res://GUI/TypewriterText.gd" type="Script" id=4]
+
+[node name="Command" type="NinePatchRect"]
+margin_right = 186.0
+margin_bottom = 32.0
+rect_min_size = Vector2( 186, 32 )
+mouse_filter = 0
+mouse_default_cursor_shape = 2
+texture = ExtResource( 3 )
+patch_margin_top = 7
+patch_margin_bottom = 7
+axis_stretch_vertical = 2
+script = ExtResource( 2 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label" type="Label" parent="."]
+margin_top = 7.0
+margin_right = 208.0
+margin_bottom = 25.0
+custom_fonts/font = ExtResource( 1 )
+text = " > BOY. LISTEN TO ME, BOY. "
+script = ExtResource( 4 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="Label"]
+wait_time = 0.01
+one_shot = true
+[connection signal="gui_input" from="." to="." method="_on_Command_gui_input"]
+[connection signal="mouse_entered" from="." to="." method="_on_Command_mouse_entered"]
+[connection signal="mouse_exited" from="." to="." method="_on_Command_mouse_exited"]
+[connection signal="timeout" from="Label/Timer" to="Label" method="_on_Timer_timeout"]

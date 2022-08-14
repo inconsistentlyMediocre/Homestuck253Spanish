@@ -1,0 +1,85 @@
+[gd_scene load_steps=7 format=2]
+
+[ext_resource path="res://Entities/Harlequinsprite.gd" type="Script" id=1]
+[ext_resource path="res://AnimationFrames/SpriteFrames.tres" type="SpriteFrames" id=2]
+[ext_resource path="res://AnimationFrames/SpriteTextFrames.tres" type="SpriteFrames" id=3]
+[ext_resource path="res://Entities/SpriteText.gd" type="Script" id=4]
+
+[sub_resource type="Animation" id=1]
+resource_name = "Idle"
+length = 2.0
+loop = true
+tracks/0/type = "value"
+tracks/0/path = NodePath(".:offset")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -64 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("InteractArea:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, -64 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("TextPivot:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 1, 2 ),
+"transitions": PoolRealArray( -2, -2, -2 ),
+"update": 0,
+"values": [ Vector2( 0, -80 ), Vector2( 0, -144 ), Vector2( 0, -80 ) ]
+}
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 74, 158 )
+
+[node name="Harlequinsprite" type="Node2D"]
+script = ExtResource( 1 )
+
+[node name="Harlequinsprite" type="AnimatedSprite" parent="." groups=[
+"Interactables",
+]]
+position = Vector2( 0, -114 )
+frames = ExtResource( 2 )
+animation = "Idle"
+playing = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Harlequinsprite"]
+autoplay = "Idle"
+anims/Idle = SubResource( 1 )
+
+[node name="InteractArea" type="Area2D" parent="Harlequinsprite"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Harlequinsprite/InteractArea"]
+position = Vector2( 0, 12 )
+shape = SubResource( 2 )
+
+[node name="TextPivot" type="Node2D" parent="Harlequinsprite"]
+position = Vector2( 0, -80 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Text" type="AnimatedSprite" parent="Harlequinsprite/TextPivot"]
+visible = false
+frames = ExtResource( 3 )
+script = ExtResource( 4 )
+[connection signal="animation_finished" from="Harlequinsprite/TextPivot/Text" to="Harlequinsprite/TextPivot/Text" method="_on_Text_animation_finished"]

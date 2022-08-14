@@ -1,0 +1,289 @@
+[gd_scene load_steps=18 format=2]
+
+[ext_resource path="res://Backgrounds/Kitchen/Kitchen.png" type="Texture" id=1]
+[ext_resource path="res://Backgrounds/Kitchen/Counter.png" type="Texture" id=2]
+[ext_resource path="res://Backgrounds/Kitchen/Oil.png" type="Texture" id=3]
+[ext_resource path="res://Backgrounds/Kitchen/Fridge.png" type="Texture" id=4]
+[ext_resource path="res://Backgrounds/Kitchen/Counter2.png" type="Texture" id=5]
+[ext_resource path="res://Backgrounds/Kitchen/Door.png" type="Texture" id=6]
+[ext_resource path="res://Backgrounds/Kitchen/Cabinet2.png" type="Texture" id=7]
+[ext_resource path="res://Backgrounds/Kitchen/Cabinet.png" type="Texture" id=8]
+[ext_resource path="res://Backgrounds/Kitchen/Bowl.png" type="Texture" id=9]
+[ext_resource path="res://Backgrounds/Kitchen/ArrowKitchen.png" type="Texture" id=10]
+[ext_resource path="res://House/Kitchen.gd" type="Script" id=11]
+[ext_resource path="res://John/John.tscn" type="PackedScene" id=12]
+[ext_resource path="res://Entities/Harlequinsprite.tscn" type="PackedScene" id=13]
+[ext_resource path="res://House/ShowView.gd" type="Script" id=14]
+[ext_resource path="res://Backgrounds/Kitchen/Drawing2.png" type="Texture" id=15]
+[ext_resource path="res://Backgrounds/Kitchen/JohnOil.jpg" type="Texture" id=16]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 97, 118 )
+
+[node name="Kitchen" type="Node2D"]
+script = ExtResource( 11 )
+map_size = Vector2( 1482, 1067 )
+
+[node name="Map" type="Node2D" parent="."]
+
+[node name="Kitchen" type="StaticBody2D" parent="Map"]
+z_index = -4
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Map/Kitchen"]
+texture = ExtResource( 1 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Kitchen"]
+visible = false
+polygon = PoolVector2Array( 5, 703, 42, 671, 634, 381, 1397, 628, 1395, 650, 1436, 663, 1470, 691, 1464, 212, 682, 3, 10, 228 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Map/Kitchen"]
+visible = false
+polygon = PoolVector2Array( 766, 1006, 25, 665, -8, 709, 769, 1070, 1490, 693, 1462, 651 )
+
+[node name="OilSpill" type="Sprite" parent="Map" groups=[
+"Interactables",
+]]
+position = Vector2( 530, 489 )
+z_index = -2
+texture = ExtResource( 3 )
+centered = false
+
+[node name="InteractArea" type="Area2D" parent="Map/OilSpill"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/OilSpill/InteractArea"]
+polygon = PoolVector2Array( 153, 214, 197, 200, 245, 235, 254, 192, 309, 143, 266, 99, 225, 97, 156, 110, 120, 143, 74, 148, 71, 183 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="Map/OilSpill/InteractArea"]
+position = Vector2( 199, -112 )
+polygon = PoolVector2Array( 144, 219, 197, 200, 247, 174, 298, 133, 215, 103, 187, 127, 137, 155, 88, 165, 82, 196 )
+
+[node name="Fridge" type="StaticBody2D" parent="Map"]
+z_index = -2
+
+[node name="Sprite" type="Sprite" parent="Map/Fridge"]
+position = Vector2( 467, 120 )
+texture = ExtResource( 4 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Fridge"]
+polygon = PoolVector2Array( 712, 393, 714, 462, 569, 523, 521, 495, 519, 423, 671, 370 )
+
+[node name="FridgeDrawing" type="Node2D" parent="Map/Fridge" groups=[
+"Interactables",
+]]
+
+[node name="InteractArea" type="Area2D" parent="Map/Fridge/FridgeDrawing"]
+collision_layer = 2
+collision_mask = 2147483650
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Fridge/FridgeDrawing/InteractArea"]
+polygon = PoolVector2Array( 611, 375, 622, 334, 610, 323, 623, 305, 640, 312, 640, 327, 659, 330, 651, 384 )
+
+[node name="StoveAndCounter" type="StaticBody2D" parent="Map"]
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Map/StoveAndCounter"]
+position = Vector2( 50, 352 )
+z_index = -2
+texture = ExtResource( 2 )
+centered = false
+
+[node name="RedBox" type="Node2D" parent="Map/StoveAndCounter/Sprite" groups=[
+"Interactables",
+]]
+position = Vector2( 103, 160 )
+
+[node name="InteractArea" type="Area2D" parent="Map/StoveAndCounter/Sprite/RedBox"]
+position = Vector2( -555, -392 )
+collision_layer = 2
+collision_mask = 2
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/StoveAndCounter/Sprite/RedBox/InteractArea"]
+polygon = PoolVector2Array( 579, 380, 580, 317, 629, 313, 636, 321, 632, 381, 586, 384 )
+
+[node name="Sprite2" type="Sprite" parent="Map/StoveAndCounter"]
+position = Vector2( 153, 512 )
+texture = ExtResource( 5 )
+centered = false
+
+[node name="Plant" type="Node2D" parent="Map/StoveAndCounter/Sprite2" groups=[
+"Interactables",
+]]
+
+[node name="InteractArea" type="Area2D" parent="Map/StoveAndCounter/Sprite2/Plant"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Map/StoveAndCounter/Sprite2/Plant/InteractArea"]
+position = Vector2( 611, 346 )
+shape = SubResource( 1 )
+
+[node name="SassacreBook" type="Node2D" parent="Map/StoveAndCounter/Sprite2" groups=[
+"Interactables",
+]]
+
+[node name="InteractArea" type="Area2D" parent="Map/StoveAndCounter/Sprite2/SassacreBook"]
+position = Vector2( -195, -156 )
+collision_layer = 2
+collision_mask = 2
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/StoveAndCounter/Sprite2/SassacreBook/InteractArea"]
+polygon = PoolVector2Array( 537, 349, 536, 305, 636, 271, 707, 351, 704, 382, 607, 419 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="Cabinet2" type="Sprite" parent="Map/StoveAndCounter"]
+position = Vector2( 49, 120 )
+texture = ExtResource( 8 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/StoveAndCounter"]
+z_index = 1
+polygon = PoolVector2Array( 541, 520, 311, 637, 311, 687, 685, 830, 688, 844, 850, 874, 862, 961, 771, 984, 571, 896, 53, 672, 52, 522, 446, 349, 541, 388 )
+__meta__ = {
+"_edit_lock_": true
+}
+
+[node name="KitchenDoor" type="Sprite" parent="Map" groups=[
+"Interactables",
+]]
+position = Vector2( 926, 137 )
+z_index = -2
+texture = ExtResource( 6 )
+centered = false
+
+[node name="InteractArea" type="Area2D" parent="Map/KitchenDoor"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/KitchenDoor/InteractArea"]
+polygon = PoolVector2Array( -2, 337, 119, 376, 125, 34, -3, -2 )
+
+[node name="ArrowKitchen" type="Sprite" parent="Map" groups=[
+"Interactables",
+]]
+position = Vector2( 1078, 822 )
+z_index = -2
+texture = ExtResource( 10 )
+centered = false
+
+[node name="IntertactArea" type="Area2D" parent="Map/ArrowKitchen"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/ArrowKitchen/IntertactArea"]
+polygon = PoolVector2Array( 8, 60, 80, 59, 79, 4, 67, 12, 44, 0, 0, 21, 0, 39, 7, 44 )
+
+[node name="YSort" type="YSort" parent="Map"]
+z_index = -1
+
+[node name="John" parent="Map/YSort" instance=ExtResource( 12 )]
+position = Vector2( 920, 540 )
+
+[node name="Harlequinsprite" parent="Map/YSort" instance=ExtResource( 13 )]
+position = Vector2( -113, 264 )
+
+[node name="Cabinet" type="StaticBody2D" parent="Map/YSort" groups=[
+"Interactables",
+]]
+position = Vector2( 1094, 576 )
+
+[node name="Sprite" type="Sprite" parent="Map/YSort/Cabinet"]
+position = Vector2( -21, -408 )
+texture = ExtResource( 7 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/YSort/Cabinet"]
+position = Vector2( -1101, -576 )
+polygon = PoolVector2Array( 1400, 672, 1345, 701, 1106, 584, 1151, 565 )
+
+[node name="InteractArea" type="Area2D" parent="Map/YSort/Cabinet"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/YSort/Cabinet/InteractArea"]
+polygon = PoolVector2Array( 242, 124, 304, 89, 305, -308, 323, -331, 29, -413, -25, -383, -8, -368, 6, 12 )
+
+[node name="Bowl" type="StaticBody2D" parent="Map/YSort" groups=[
+"Interactables",
+]]
+position = Vector2( 548, 555 )
+__meta__ = {
+"_edit_group_": true
+}
+
+[node name="Sprite" type="Sprite" parent="Map/YSort/Bowl"]
+position = Vector2( -1, -45 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/YSort/Bowl"]
+position = Vector2( -545, -558 )
+polygon = PoolVector2Array( 572, 568, 598, 576, 622, 571, 641, 554, 622, 543, 594, 547, 577, 557 )
+
+[node name="InteractArea" type="Area2D" parent="Map/YSort/Bowl"]
+collision_layer = 2
+collision_mask = 2147483650
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/YSort/Bowl/InteractArea"]
+position = Vector2( -545, -558 )
+polygon = PoolVector2Array( 569, 571, 598, 580, 622, 575, 652, 570, 704, 573, 713.057, 571.302, 720, 570, 716, 562, 701, 564, 637, 562, 641, 554, 643, 529, 628, 518, 599, 514, 574, 521, 559, 531, 559, 552 )
+
+[node name="Phone" type="Node2D" parent="Map" groups=[
+"Interactables",
+]]
+
+[node name="InteractArea" type="Area2D" parent="Map/Phone"]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Map/Phone/InteractArea"]
+polygon = PoolVector2Array( 879, 306, 873, 279, 875, 254, 880, 241, 911, 245, 912, 311, 903, 313, 900, 340, 893, 356, 885, 355, 881, 325, 885, 309 )
+
+[node name="Position2D" type="Position2D" parent="."]
+position = Vector2( 1482, 1067 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="DrawingView" type="TextureRect" parent="CanvasLayer" groups=[
+"Views",
+]]
+visible = false
+margin_right = 650.0
+margin_bottom = 450.0
+mouse_default_cursor_shape = 2
+texture = ExtResource( 15 )
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JohnOilView" type="TextureRect" parent="CanvasLayer" groups=[
+"Views",
+]]
+visible = false
+margin_right = 650.0
+margin_bottom = 450.0
+mouse_default_cursor_shape = 2
+texture = ExtResource( 16 )
+script = ExtResource( 14 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
